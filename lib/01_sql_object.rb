@@ -10,7 +10,7 @@ class SQLObject
     query = DBConnection.execute2(<<-SQL)
       SELECT * FROM "#{table}"
     SQL
-    titles = query.first.map(&:to_sym)
+    query.first.map(&:to_sym)
   end
 
   def self.finalize!

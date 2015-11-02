@@ -1,6 +1,6 @@
 class AttrAccessorObject
   def self.my_attr_accessor(*names)
-    attributes = names.map do |name|
+    names.map do |name|
       define_method("#{name}") do
         instance_variable_get("@#{name}")
       end
