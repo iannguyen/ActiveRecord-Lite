@@ -1,9 +1,34 @@
 require 'sqlite3'
+require 'byebug'
+
+def find_file_by_type(ext)
+  Dir.chdir('../db')
+  sql_file = Dir.entries('.').select { |file_name| file_name.split(".").last == ext }
+  sql_file.first
+end
+
+def set_up_DB(sql_file)
+  if find_file_by_type("db").nil?
+    sql_file_name = sql_file.split(".").first
+    command = "cat '#{sql_file}' | sqlite3 '#{sql_file_name}.db' "
+    system("echo `#{command}`")
+  end
+  find_file_by_type('db')
+end
+
+CATS_SQL_FILE = find_file_by_type("sql")
+raise "oh god" if CATS_SQL_FILE.nil?
+CATS_DB_FILE = find_file_by_type("db")
+
+CATS_DB = set_up_DB(CATS_SQL_FILE)
+
+puts CATS_SQL_FILE
+puts CATS_DB_FILE
 
 # https://tomafro.net/2010/01/tip-relative-paths-with-file-expand-path
-ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
-CATS_SQL_FILE = File.join(ROOT_FOLDER, 'cats.sql')
-CATS_DB_FILE = File.join(ROOT_FOLDER, 'cats.db')
+# ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
+# CATS_SQL_FILE = File.join(ROOT_FOLDER, 'cats.sql')
+# CATS_DB_FILE = File.join(ROOT_FOLDER, 'cats.db')
 
 class DBConnection
   def self.open(db_file_name)
