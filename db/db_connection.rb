@@ -17,7 +17,7 @@ def set_up_DB(sql_file)
 end
 
 CATS_SQL_FILE = find_file_by_type("sql")
-raise "oh god" if CATS_SQL_FILE.nil?
+raise "OH NO..." if CATS_SQL_FILE.nil?
 CATS_DB_FILE = find_file_by_type("db")
 
 CATS_DB = set_up_DB(CATS_SQL_FILE)
