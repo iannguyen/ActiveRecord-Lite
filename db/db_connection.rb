@@ -22,9 +22,6 @@ CATS_DB_FILE = find_file_by_type("db")
 
 CATS_DB = set_up_DB(CATS_SQL_FILE)
 
-puts CATS_SQL_FILE
-puts CATS_DB_FILE
-
 # https://tomafro.net/2010/01/tip-relative-paths-with-file-expand-path
 # ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
 # CATS_SQL_FILE = File.join(ROOT_FOLDER, 'cats.sql')
